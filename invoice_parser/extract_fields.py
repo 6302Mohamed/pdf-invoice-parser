@@ -1,32 +1,33 @@
+from __future__ import annotations
 import re
 from typing import Dict, Optional
 
+from invoice_parser.config_loader import AppConfig
 
-def extract_invoice_fields(text: str) -> Dict[str, Optional[str]]:
+
+def _first_match(text: str, patterns: list[str]) -> Optional[str]:
     """
-    Extract core invoice fields from invoice text using regex.
-    Expected labels in your dataset:
-      - Order ID: 10248
-      - Order Date: 2016-07-04
-      - TotalPrice 440.0
+    Try regex patterns in order and return the first captured value.
+    If a regex has multiple capture groups, return the LAST group.
     """
-    fields: Dict[str, Optional[str]] = {
-        "invoice_number": None,
-        "invoice_date": None,
-        "total_amount": None,
-    }
+    for pat in patterns:
+        m = re.search(pat, text, flags=re.IGNORECASE)
+        if not m:
+            continue
 
-    m = re.search(r"Order ID:\s*(\d+)", text)
-    if m:
-        fields["invoice_number"] = m.group(1)
+        if m.lastindex:
+            return m.group(m.lastindex).strip()
 
-    m = re.search(r"Order Date:\s*([0-9]{4}-[0-9]{2}-[0-9]{2})", text)
-    if m:
-        fields["invoice_date"] = m.group(1)
+    return None
 
-    # allow: TotalPrice 440.0 OR TotalPrice: 440.0
-    m = re.search(r"TotalPrice\s*:?\s*([0-9]+(?:\.[0-9]+)?)", text)
-    if m:
-        fields["total_amount"] = m.group(1)
 
-    return fields
+def extract_fields(text: str, cfg: AppConfig) -> Dict[str, Optional[str]]:
+    """
+    Extract invoice fields using patterns defined in config.yml
+    """
+    results: Dict[str, Optional[str]] = {}
+
+    for field_name, rule in cfg.fields.items():
+        results[field_name] = _first_match(text, rule.patterns)
+
+    return results

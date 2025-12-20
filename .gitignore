@@ -6,17 +6,15 @@ __pycache__/
 .venv/
 venv/
 
-# Outputs (generated files)
+# Outputs (generated)
 outputs/
 outputs_test/
 *.csv
 *.xlsx
 run_log.txt
 
-# OS files
+# OS / IDE
 Thumbs.db
 .DS_Store
-
-# IDE
 .vscode/
 .idea/
