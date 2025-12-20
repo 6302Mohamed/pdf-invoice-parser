@@ -11,5 +11,13 @@ A Python utility that batch-processes invoice PDFs, extracts key fields (Invoice
 
 ---
 
+
+## Example Output
+
+Below is an example of the generated Excel output after processing invoice PDFs:
+
+![Example Output](assets/example_output.png)
+
+
 ## Project Structure
 
