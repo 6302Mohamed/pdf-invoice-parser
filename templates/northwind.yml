@@ -1,0 +1,22 @@
+defaults:
+  min_chars_text_pdf: 50
+  ocr_dpi: 250
+
+fields:
+  invoice_number:
+    required: true
+    patterns:
+      - 'Order ID:\s*(\d+)'
+      - 'Invoice (No|#):\s*([A-Z0-9-]+)'
+
+  invoice_date:
+    required: true
+    patterns:
+      - 'Order Date:\s*([0-9]{4}-[0-9]{2}-[0-9]{2})'
+      - 'Invoice Date:\s*([0-9/.-]+)'
+
+  total_amount:
+    required: true
+    patterns:
+      - 'TotalPrice\s*:?\s*([0-9]+(?:\.[0-9]+)?)'
+      - '(Grand Total|Total Due):\s*\$?([0-9,]+(?:\.[0-9]+)?)'
