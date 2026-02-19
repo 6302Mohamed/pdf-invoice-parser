@@ -280,6 +280,4 @@ If you found this useful:
 
 ```
 
-### If you want it *perfectly matched* to your exact runtime behavior
-Your `main.py` probably writes outputs/logs to specific filenames/paths and maybe selects a template name in code. If you paste your `main.py` (or just the part that loads config/templates and exports), I’ll adjust the README so **every command/output path is 100% accurate**.
-```
+
