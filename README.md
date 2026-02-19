@@ -1,8 +1,4 @@
-You’re right — I gave you a “mostly complete” README but it **left gaps** (and some lines were vague like “configured via YAML template” without showing it). Here’s a **full, consistent, paste-ready `README.md`** in proper Markdown, with **no missing sections**, plus a **real YAML template example**, **how outputs/logs work**, and **OCR note**.
 
-Copy-paste this as the entire `README.md`:
-
-```markdown
 # PDF Invoice Parser (PDF → CSV / Excel)
 
 A production-style Python tool that batch-processes invoice PDFs, extracts structured fields, normalizes values, and exports results to **CSV** and **Excel (.xlsx)**.
